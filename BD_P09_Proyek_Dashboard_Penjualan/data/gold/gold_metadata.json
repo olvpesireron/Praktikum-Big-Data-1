@@ -1,0 +1,38 @@
+{
+  "diperbarui_pada": "2026-11-25 09:39:34",
+  "spark": {
+    "spark_versi": "3.5.3",
+    "master": "local[*]",
+    "core_paralel": 2,
+    "app_id": "local-1795574254042",
+    "spark_ui": "http://192.0.2.2:4040"
+  },
+  "baris_bronze": 5025160,
+  "baris_silver": 4980147,
+  "baris_gold": {
+    "gold_cube": 1001,
+    "gold_rollup_wilayah": 76,
+    "gold_harian": 4015,
+    "gold_heatmap_kirim_rating": 640,
+    "gold_kuantil_kirim": 11,
+    "gold_kuantil_nilai": 6,
+    "gold_jam_hari": 1848,
+    "gold_metode_bayar": 15
+  },
+  "ukuran_mb": {
+    "bronze": 112.57,
+    "silver": 156.82,
+    "gold": 0.91
+  },
+  "durasi_detik": {
+    "bronze": 42.0,
+    "silver": 39.4,
+    "gold": 35.9,
+    "laporan": 2.1
+  },
+  "latensi_detik": {
+    "gold": 0.0146,
+    "silver": 0.931
+  },
+  "periode": "2025-10-01 s.d. +365 hari"
+}
