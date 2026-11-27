@@ -20,20 +20,80 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import config  # noqa: E402
 
 # ------------------------------------------------------------------ gaya
-BIRU, MERAH, ABU, HIJAU = "#257de0", "#ec4647", "#b8b8b8", "#008a17"
+BIRU, MERAH, ABU, HIJAU = "#8B8AEF", "#FF91AE", "#B9B8F3", "#77CFC3"
+PALET_PASTEL = ["#8B8AEF", "#FF91AE", "#FFBE7B", "#77CFC3", "#7ECAFF", "#C6A6F6"]
 SEMUA = "(Semua)"
 NAMA_HARI = {1: "Sen", 2: "Sel", 3: "Rab", 4: "Kam", 5: "Jum", 6: "Sab", 7: "Min"}
 TEMA = dict(template="plotly_white", margin=dict(l=10, r=10, t=50, b=10),
-            font=dict(family="Inter, Segoe UI, sans-serif", size=12),
-            hoverlabel=dict(bgcolor="white"))
+            paper_bgcolor="rgba(255,255,255,0)", plot_bgcolor="rgba(255,255,255,0.72)",
+            font=dict(family="Nunito, Inter, Segoe UI, sans-serif", size=12, color="#40395D"),
+            colorway=PALET_PASTEL, hoverlabel=dict(bgcolor="#ffffff", font_color="#40395D"))
 
 st.set_page_config(page_title="Dashboard Penjualan Nasional", page_icon="📊", layout="wide")
 st.markdown("""
 <style>
-div[data-testid="stMetric"] {background:#f6f8fc;border:1px solid #e1e6f0;border-radius:10px;padding:10px 14px;}
-div[data-testid="stMetricLabel"] p {font-size:0.85rem;color:#555;}
-div[data-testid="stMetricValue"] {font-size:1.55rem;}
-.block-container {padding-top:1.6rem;}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=Pacifico&display=swap');
+
+[data-testid="stAppViewContainer"] {
+  background:
+    radial-gradient(circle at 3% 6%, rgba(255, 189, 219, .52), transparent 24rem),
+    radial-gradient(circle at 96% 4%, rgba(183, 224, 255, .62), transparent 27rem),
+    radial-gradient(circle at 73% 58%, rgba(209, 246, 221, .58), transparent 25rem),
+    linear-gradient(135deg, #fff8fc 0%, #f7f4ff 46%, #f2fbff 100%);
+  color: #40395D;
+}
+[data-testid="stHeader"] {background: rgba(255,255,255,0);}
+.block-container {padding-top: 1.5rem; padding-bottom: 2.5rem;}
+
+h1, h2, h3 {font-family: 'Nunito', 'Segoe UI', sans-serif !important; color: #40395D !important;}
+h1 {
+  background: linear-gradient(90deg, #7A7AE8 0%, #ED82AA 43%, #F1A85A 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  font-weight: 800 !important; letter-spacing: -.045em;
+}
+
+div[data-testid="stMetric"] {
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(255,255,255,.95);
+  border-top: 4px solid #B9B8F3;
+  border-radius: 18px; padding: 13px 16px;
+  box-shadow: 0 10px 25px rgba(117, 99, 155, .11);
+}
+[data-testid="stHorizontalBlock"] > div:nth-child(2n) div[data-testid="stMetric"] {border-top-color: #FFB5C9;}
+[data-testid="stHorizontalBlock"] > div:nth-child(3n) div[data-testid="stMetric"] {border-top-color: #8FDACE;}
+div[data-testid="stMetricLabel"] p {font-size: .84rem; color: #756D91; font-weight: 700;}
+div[data-testid="stMetricValue"] {font-size: 1.5rem; color: #443B64; font-weight: 800;}
+
+[data-testid="stSidebar"] > div:first-child {
+  background: linear-gradient(180deg, #FFF0F7 0%, #F1EEFF 48%, #E9F8FF 100%);
+  border-right: 1px solid rgba(255,255,255,.9);
+}
+[data-testid="stSidebar"] h1 {font-size: 1.55rem !important;}
+[data-testid="stSidebar"] .stSelectbox label,
+[data-testid="stSidebar"] .stSelectSlider label {font-weight: 800; color: #675E86;}
+
+button[data-baseweb="tab"] {
+  border-radius: 999px !important; color: #716889 !important;
+  font-weight: 800 !important; padding: .48rem .78rem !important;
+}
+button[data-baseweb="tab"][aria-selected="true"] {
+  background: linear-gradient(90deg, #E7E0FF, #FFE3EF, #FFF0CE) !important;
+  color: #584E7B !important;
+}
+[data-testid="stTabHighlight"] {background: #A79FF3 !important;}
+
+div[data-testid="stPlotlyChart"] {
+  background: rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.96);
+  padding: 7px; border-radius: 18px; box-shadow: 0 8px 22px rgba(117, 99, 155, .08);
+}
+.rainbow-hero {
+  background: linear-gradient(110deg, rgba(255,255,255,.85), rgba(255,235,246,.82), rgba(231,245,255,.88));
+  border: 1px solid rgba(255,255,255,.96); border-radius: 24px; padding: 1.25rem 1.45rem;
+  box-shadow: 0 14px 32px rgba(117, 99, 155, .12); margin-bottom: .5rem;
+}
+.rainbow-hero .eyebrow {color: #9179C6; font-weight: 800; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;}
+.rainbow-hero .sparkle {font-family: 'Pacifico', cursive; color: #E782AA; font-size: 1.05rem; margin-left: .4rem;}
+hr {border-color: rgba(167,159,243,.28) !important;}
 </style>""", unsafe_allow_html=True)
 
 
@@ -131,7 +191,8 @@ def gambar(fig, tinggi=380, **kw):
 
 
 # ------------------------------------------------------------------ sidebar
-st.sidebar.title("🎛️ Filter")
+st.sidebar.title("🎛️ Filter Cerita")
+st.sidebar.caption("Pilih sudut pandang untuk menjelajahi data penjualan.")
 f_prov = st.sidebar.selectbox("Provinsi", [SEMUA] + PROVINSI)
 f_kat = st.sidebar.selectbox("Kategori produk", [SEMUA] + KATEGORI)
 b_awal, b_akhir = st.sidebar.select_slider("Rentang bulan", options=BULAN, value=(BULAN[0], BULAN[-1]))
@@ -153,6 +214,11 @@ st.sidebar.caption("Pembanding KPI = periode sebelumnya dengan panjang yang sama
 lingkup = " · ".join(x for x in [f_prov if f_prov != SEMUA else "Nasional",
                                  f_kat if f_kat != SEMUA else "semua kategori",
                                  f"{b_awal} s.d. {b_akhir}"])
+st.markdown("""
+<div class="rainbow-hero">
+  <div class="eyebrow">Big Data · Marketplace Indonesia <span class="sparkle">sparkle!</span></div>
+</div>
+""", unsafe_allow_html=True)
 st.title("📊 Dashboard Penjualan Nasional")
 st.caption(f"Lingkup: **{lingkup}** — data sintetis marketplace, diolah dengan Apache Spark")
 
