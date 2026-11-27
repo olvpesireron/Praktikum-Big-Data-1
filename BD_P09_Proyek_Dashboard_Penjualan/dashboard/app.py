@@ -93,6 +93,20 @@ div[data-testid="stPlotlyChart"] {
 }
 .rainbow-hero .eyebrow {color: #9179C6; font-weight: 800; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase;}
 .rainbow-hero .sparkle {font-family: 'Pacifico', cursive; color: #E782AA; font-size: 1.05rem; margin-left: .4rem;}
+.license-card {
+  display: flex; align-items: center; gap: .9rem; max-width: 640px; margin: 1.6rem auto .5rem;
+  padding: .9rem 1.2rem; border: 1px solid rgba(255,255,255,.95); border-radius: 18px;
+  background: linear-gradient(105deg, rgba(242,235,255,.88), rgba(255,232,243,.9), rgba(230,248,255,.9));
+  box-shadow: 0 10px 26px rgba(117, 99, 155, .10);
+}
+.license-seal {
+  display: grid; place-items: center; width: 43px; height: 43px; flex: 0 0 43px; border-radius: 50%;
+  background: linear-gradient(135deg, #938CEC, #F49AB8, #FFC97A); color: white; font-size: 1.25rem;
+  box-shadow: 0 5px 12px rgba(209, 120, 165, .28);
+}
+.license-card p {margin: 0; color: #8C7EA8; font-size: .68rem; font-weight: 800; letter-spacing: .12em;}
+.license-card h4 {margin: .05rem 0; color: #51466E; font-family: 'Pacifico', cursive; font-size: 1.18rem; font-weight: 400;}
+.license-card span {color: #786D91; font-size: .74rem;}
 hr {border-color: rgba(167,159,243,.28) !important;}
 </style>""", unsafe_allow_html=True)
 
@@ -509,3 +523,13 @@ with tab5:
 st.markdown("---")
 st.caption(f"Sumber: tabel gold pipeline Spark BD-P09 (data sintetis) · diperbarui {meta['diperbarui_pada']} · "
            f"periode Okt 2025 – Sep 2026 · Omzet = nilai bersih pesanan berstatus SELESAI setelah diskon.")
+st.markdown("""
+<div class="license-card">
+  <div class="license-seal">✦</div>
+  <div>
+    <p>DESIGNED &amp; CREATED BY</p>
+    <h4>Livia D'Pesireron</h4>
+    <span>© 2026 · Big Data Visualization · All rights reserved</span>
+  </div>
+</div>
+""", unsafe_allow_html=True)
