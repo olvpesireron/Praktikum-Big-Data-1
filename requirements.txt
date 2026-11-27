@@ -1,0 +1,7 @@
+# Dependencies needed by the deployed Streamlit dashboard.
+# The Spark pipeline runs locally/Docker; the cloud app only reads the committed gold tables.
+streamlit>=1.50
+pandas>=2.0
+numpy>=1.24
+pyarrow>=14
+plotly>=5.20
